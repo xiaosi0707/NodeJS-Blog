@@ -22,9 +22,10 @@ swig.setDefaults({
 app.use('/public', express.static(__dirname + '/public'));
 /* 静态资源托管 - End */
 
-app.get('/', (req, res, next) => {
-    res.render('index')
-})
+//根据不同功能划分模块
+app.use('/admin', require('./router/admin')); // 后台
+app.use('/api', require('./router/api')); // 接口
+app.use('/', require('./router/main')); // 前端
 
 // 监听
 app.listen(8081, () => {
