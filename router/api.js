@@ -15,6 +15,7 @@ router.use((req, res, next) => {
     next();
 })
 
+// 注册
 router.post('/user/register', (req, res, next) => {
     let { username, password, repassword } = req.body
     // 用户名不能为空
@@ -59,6 +60,33 @@ router.post('/user/register', (req, res, next) => {
         responseData.message = '注册成功';
         res.json(responseData);
         return user.save();
+    })
+})
+
+// 登录
+router.post('/user/login', (req, res, next) => {
+    let { username, password } = req.body
+    if(username === '' || password === '') {
+        responseData.code = 1;
+        responseData.message = '用户名或密码不能为空';
+        res.json(responseData);
+        return;
+    }
+    // 查询用户和密码是否注册
+    User.findOne({
+        username: username,
+        password: password
+    }).then(userInfo => {
+        if(!userInfo) {
+            responseData.code = 2;
+            responseData.message = '用户名或密码错误';
+            res.json(responseData);
+            return;
+        }
+        // 用户名和密码正确
+        responseData.message = '登录成功';
+        res.json(responseData);
+        return;
     })
 })
 

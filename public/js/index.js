@@ -40,4 +40,20 @@ $(function () {
         })
     })
 
+    // 登录
+    $loginBox.find('button').on('click', () => {
+        $.ajax({
+            type: 'post',
+            url: '/api/user/login',
+            data: {
+                username: $loginBox.find('[name="username"]').val(),
+                password: $loginBox.find('[name="password"]').val()
+            },
+            dataType: 'json',
+            success (res) {
+                console.log(res)
+            }
+        })
+    })
+
 })
