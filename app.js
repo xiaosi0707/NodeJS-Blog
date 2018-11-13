@@ -18,6 +18,10 @@ swig.setDefaults({
 })
 /* Swig - End */
 
+/* 静态资源托管 - Start */
+app.use('/public', express.static(__dirname + '/public'));
+/* 静态资源托管 - End */
+
 app.get('/', (req, res, next) => {
     res.render('index')
 })
