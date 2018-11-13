@@ -2,12 +2,27 @@
 *wyunfei在2018/11/13创建了nodeJS项目文件app.js
 */
 let express = require('express');
-let app = express()
+let swig = require('swig'); // 模板处理
+let app = express() // 创建应用
+
+/* Swig - Start */
+// 第一个参数：模板引擎的名称，同时也是模板文件的后缀；第二个参数表示用于解析处理模板内容的方法
+app.engine('html', swig.renderFile)
+// 设置模板文件的存放目录：第一个参数必须是views；第二个参数是目录
+app.set('views', './views');
+// 注册所使用的模板引擎：第一个参数必须是view engine；第二个参数和app.engine方法中定义的模板引擎（第一个参数）的名称一致
+app.set('view engine', 'html');
+// 在开发中需要取消模板缓存机制
+swig.setDefaults({
+    cache: false
+})
+/* Swig - End */
 
 app.get('/', (req, res, next) => {
-    res.send('Hello World!')
+    res.render('index')
 })
 
+// 监听
 app.listen(8081, () => {
     console.log('running at http://localhost:8081/')
 })

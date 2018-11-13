@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/xiaosi0707/NodeJS-Blog#readme",
   "devDependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "swig": "^1.4.2"
   }
 }
