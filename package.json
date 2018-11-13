@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xiaosi0707/NodeJS-Blog.git"
+  },
+  "author": "wyunfei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaosi0707/NodeJS-Blog/issues"
+  },
+  "homepage": "https://github.com/xiaosi0707/NodeJS-Blog#readme",
+  "devDependencies": {
+    "express": "^4.16.4"
+  }
+}
