@@ -3,6 +3,7 @@
 */
 let express = require('express');
 let router = express.Router();
+let User = require('../models/user');
 
 // 接口统一返回格式
 let responseData = {};
@@ -15,7 +16,6 @@ router.use((req, res, next) => {
 })
 
 router.post('/user/register', (req, res, next) => {
-    console.log(req.body)
     let { username, password, repassword } = req.body
     // 用户名不能为空
     if (username === '') {
@@ -38,10 +38,28 @@ router.post('/user/register', (req, res, next) => {
         res.json(responseData);
         return;
     }
-    // 注册成功
-    responseData.code = 0;
-    responseData.message = '注册成功';
-    res.json(responseData);
+    // 用户名是否注册过
+    //用户名是否已经注册
+    User.findOne({
+        username: username
+    }).then(function (userinfo) {
+        // 已注册
+        if(userinfo) {
+            responseData.code = 4;
+            responseData.message = '用户名已经被注册了';
+            res.json(responseData);
+            return;
+        }
+        //未注册 - 保存用户信息到数据库中
+        let user = new User({
+            username: username,
+            password: password
+        });
+        responseData.code = 0;
+        responseData.message = '注册成功';
+        res.json(responseData);
+        return user.save();
+    })
 })
 
 module.exports = router

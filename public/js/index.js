@@ -28,8 +28,14 @@ $(function () {
                 repassword: $registerBox.find('[name="repassword"]').val()
             },
             dataType: 'json',
-            success(result) {
-                console.log(result)
+            success(res) {
+                let { code, message } = res
+                $registerBox.find('.colWarning').html(message);
+                if (!code) {
+                    alert('注册成功！');
+                    $registerBox.hide();
+                    $loginBox.show();
+                }
             }
         })
     })
