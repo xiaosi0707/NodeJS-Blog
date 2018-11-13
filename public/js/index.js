@@ -4,6 +4,7 @@
 $(function () {
     let $loginBox = $('#loginBox');
     let $registerBox = $('#registerBox');
+    let $userInfo = $('#userInfo');
 
     // 切换到登录
     $registerBox.find('a').on('click', () => {
@@ -52,6 +53,16 @@ $(function () {
             dataType: 'json',
             success (res) {
                 console.log(res)
+                $loginBox.find('.colWarning').html(res.userInfo.message);
+                if(!res.code) {
+                    //登录成功
+                    setTimeout(function () {
+                        $loginBox.hide();
+                        $userInfo.show();
+                        //显示目前用户信息
+                        $userInfo.find('.title span').html(res.userInfo.username);
+                    }, 1000);
+                }
             }
         })
     })
