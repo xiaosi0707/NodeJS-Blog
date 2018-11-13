@@ -5,6 +5,7 @@ let express = require('express');
 let swig = require('swig'); // 模板处理
 let app = express() // 创建应用
 let mongoose = require('mongoose')
+var bodyParser = require('body-parser'); //处理Post提交 过来的数据
 
 /* Swig - Start */
 // 第一个参数：模板引擎的名称，同时也是模板文件的后缀；第二个参数表示用于解析处理模板内容的方法
@@ -18,6 +19,8 @@ swig.setDefaults({
     cache: false
 })
 /* Swig - End */
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 /* 静态资源托管 - Start */
 app.use('/public', express.static(__dirname + '/public'));
