@@ -4,6 +4,7 @@
 let express = require('express');
 let swig = require('swig'); // 模板处理
 let app = express() // 创建应用
+let mongoose = require('mongoose')
 
 /* Swig - Start */
 // 第一个参数：模板引擎的名称，同时也是模板文件的后缀；第二个参数表示用于解析处理模板内容的方法
@@ -28,7 +29,18 @@ app.use('/api', require('./router/api')); // 接口
 app.use('/', require('./router/main')); // 前端
 
 // 监听
-app.listen(8081, () => {
-    console.log('running at http://localhost:8081/')
-})
+mongoose.connect('mongodb://localhost:27018/blog', function (err) {
+    if(err) {
+        console.log('数据库连接失败');
+    }  else{
+        console.log('数据库连接成功');
+        //监听http请求
+        app.listen(8081, () => {
+            console.log('running at http://localhost:8081/')
+        });
+    }
+});
+// app.listen(8081, () => {
+//     console.log('running at http://localhost:8081/')
+// })
 
