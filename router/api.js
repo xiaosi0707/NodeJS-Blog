@@ -77,6 +77,8 @@ router.post('/user/login', (req, res, next) => {
         username: username,
         password: password
     }).then(userInfo => {
+        console.log(userInfo)
+        let { username, _id } =userInfo
         if(!userInfo) {
             responseData.code = 2;
             responseData.message = '用户名或密码错误';
@@ -85,6 +87,10 @@ router.post('/user/login', (req, res, next) => {
         }
         // 用户名和密码正确
         responseData.message = '登录成功';
+        responseData.userInfo = {
+            _id,
+            username
+        }
         res.json(responseData);
         return;
     })
