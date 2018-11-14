@@ -77,13 +77,13 @@ button {
   color: #97c664 !important;
 }
 .colMint {
-  color: #48c5a3 !important;
+  color: #3CB7FF !important;
 }
 .colWarning {
   color: #eaa642 !important;
 }
 .colDanger {
-  color: #f76447 !important;
+  color: #3CB7FF !important;
 }
 .colPink {
   color: #e15671 !important;
@@ -175,10 +175,11 @@ nav .menu a {
   height: 56px;
   line-height: 56px;
   text-decoration: none;
+  color: #3CB7FF;
 }
 nav .menu a:hover, nav .menu a.focus {
   margin-bottom: -2px;
-  border-bottom: 2px solid #e67e22;
+  border-bottom: 2px solid #3CB7FF;
 }
 main {
   width: 1140px;
@@ -207,7 +208,7 @@ main .mainLeft .listBox .function.bortop {
 }
 main .mainLeft .listBox .function a {
   display: inline-block;
-  background: #e67e22;
+  background: #3CB7FF;
   text-align: center;
   width: 100px;
   height: 34px;
@@ -282,11 +283,11 @@ main .mainRight .rightBox .title span {
   margin-bottom: -1px;
   height: 36px;
   line-height: 36px;
-  border-bottom: 1px solid #e67e22;
+  border-bottom: 1px solid #3CB7FF;
   padding: 0px 20px 0px 0px;
 }
 main .mainRight .rightBox button {
-  background: #e67e22;
+  background: #3CB7FF;
   width: 100%;
   height: 34px;
   cursor: pointer;
@@ -324,7 +325,7 @@ main .mainRight .rightBox .line input {
   padding: 0px 5px;
 }
 main .mainRight .rightBox .line button {
-  background: #e67e22;
+  background: #3CB7FF;
   width: 222px;
   height: 34px;
   cursor: pointer;
@@ -389,7 +390,7 @@ footer .title em {
   margin-bottom: -1px;
   height: 36px;
   line-height: 36px;
-  border-bottom: 1px solid #e67e22;
+  border-bottom: 1px solid #3CB7FF;
   padding: 0px 20px 0px 0px;
   color: #fff;
   font-style: normal;
