@@ -4,11 +4,7 @@
 $(function () {
     let $loginBox = $('#loginBox');
     let $registerBox = $('#registerBox');
-<<<<<<< HEAD
     let $userInfo = $('#userInfo')
-=======
-    let $userInfo = $('#userInfo');
->>>>>>> f05849231802ea546666974ac0e74a841a7f0aa5
 
     // 切换到登录
     $registerBox.find('a').on('click', () => {
@@ -56,24 +52,11 @@ $(function () {
             },
             dataType: 'json',
             success (res) {
-<<<<<<< HEAD
-                let { code, message } = res
-                if(!code) {
+                let {code, message} = res
+                if (!code) {
                     $loginBox.find('.colWarning').html(message);
                     $loginBox.hide();
                     $userInfo.show();
-=======
-                console.log(res)
-                $loginBox.find('.colWarning').html(res.userInfo.message);
-                if(!res.code) {
-                    //登录成功
-                    setTimeout(function () {
-                        $loginBox.hide();
-                        $userInfo.show();
-                        //显示目前用户信息
-                        $userInfo.find('.title span').html(res.userInfo.username);
-                    }, 1000);
->>>>>>> f05849231802ea546666974ac0e74a841a7f0aa5
                 }
             }
         })
