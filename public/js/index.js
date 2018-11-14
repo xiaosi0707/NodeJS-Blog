@@ -5,6 +5,7 @@ $(function () {
     let $loginBox = $('#loginBox');
     let $registerBox = $('#registerBox');
     let $userInfo = $('#userInfo')
+    let $logout = $('#logout')
 
     // 切换到登录
     $registerBox.find('a').on('click', () => {
@@ -58,10 +59,20 @@ $(function () {
                     setTimeout(() => {
                         window.location.reload()
                     }, 1000)
-
                 }
             }
         })
     })
+
+    // 退出
+    $('#logout').on('click', function () {
+        $.ajax({
+            url: '/api/user/logout',
+            success: function (res) {
+                let { code, message } = res;
+                if(!code) window.location.reload();
+            }
+        });
+    });
 
 })

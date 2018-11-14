@@ -96,4 +96,14 @@ router.post('/user/login', (req, res, next) => {
     })
 })
 
+// 退出
+router.get('/user/logout', (req, res, next) => {
+    req.cookies.set('userCookies', null)
+    responseData = {
+        code: 0,
+        message: '退出成功'
+    }
+    res.json(responseData)
+})
+
 module.exports = router

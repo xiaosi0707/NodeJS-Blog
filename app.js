@@ -13,7 +13,7 @@ app.use(function (req,res,next) {
     let cookiesUserInfo=req.cookies.get('userCookies');
     req.userInfo = {}
     if(cookiesUserInfo) req.userInfo = JSON.parse(cookiesUserInfo)
-    console.log(req.userInfo)
+    // console.log(req.userInfo)
     next();
 })
 
