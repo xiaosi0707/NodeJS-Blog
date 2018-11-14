@@ -4,6 +4,7 @@
 $(function () {
     let $loginBox = $('#loginBox');
     let $registerBox = $('#registerBox');
+    let $userInfo = $('#userInfo')
 
     // 切换到登录
     $registerBox.find('a').on('click', () => {
@@ -51,7 +52,12 @@ $(function () {
             },
             dataType: 'json',
             success (res) {
-                console.log(res)
+                let { code, message } = res
+                if(!code) {
+                    $loginBox.find('.colWarning').html(message);
+                    $loginBox.hide();
+                    $userInfo.show();
+                }
             }
         })
     })
