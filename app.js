@@ -6,6 +6,16 @@ let swig = require('swig'); // 模板处理
 let app = express() // 创建应用
 let mongoose = require('mongoose')
 var bodyParser = require('body-parser'); //处理Post提交 过来的数据
+var Cookies=require('cookies')
+
+app.use(function (req,res,next) {
+    req.cookies=new Cookies(req,res)
+    let cookiesUserInfo=req.cookies.get('userCookies');
+    req.userInfo = {}
+    if(cookiesUserInfo) req.userInfo = JSON.parse(cookiesUserInfo)
+    console.log(req.userInfo)
+    next();
+})
 
 /* Swig - Start */
 // 第一个参数：模板引擎的名称，同时也是模板文件的后缀；第二个参数表示用于解析处理模板内容的方法

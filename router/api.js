@@ -77,7 +77,6 @@ router.post('/user/login', (req, res, next) => {
         username: username,
         password: password
     }).then(userInfo => {
-        console.log(userInfo)
         let { username, _id } =userInfo
         if(!userInfo) {
             responseData.code = 2;
@@ -91,6 +90,7 @@ router.post('/user/login', (req, res, next) => {
             _id,
             username
         }
+        req.cookies.set('userCookies', JSON.stringify(responseData.userInfo)) // 保存cookie
         res.json(responseData);
         return;
     })

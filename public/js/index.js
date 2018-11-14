@@ -55,8 +55,10 @@ $(function () {
                 let {code, message} = res
                 if (!code) {
                     $loginBox.find('.colWarning').html(message);
-                    $loginBox.hide();
-                    $userInfo.show();
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
+
                 }
             }
         })
