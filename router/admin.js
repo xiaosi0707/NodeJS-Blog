@@ -147,8 +147,12 @@ router.get('/category/delete', (req, res, next) => {
     })
 })
 
-// 内容
+// 内容首页
 router.get('/content', (req, res, next) => {
     res.render('../views/admin/content-index')
+})
+// 内容添加
+router.get('/content/add', (req, res, next) => {
+    res.render('../views/admin/content-add')
 })
 module.exports = router
