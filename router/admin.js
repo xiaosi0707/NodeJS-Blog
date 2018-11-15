@@ -100,7 +100,6 @@ router.post('/category/add', (req, res, next) => {
 // 分类修改
 router.get('/category/edit', (req, res, next) => {
     let id = req.query.id || '';
-    console.log(id)
     Category.findOne({
         _id: id
     }).then((rs) => {
@@ -129,6 +128,21 @@ router.post('/category/edit', (req, res, next) => {
     }).then(() => {
         res.render('admin/success', {
             message: '分类名称修改成功'
+        })
+    })
+})
+// 分类删除
+router.get('/category/delete', (req, res, next) => {
+    let id = req.query.id;
+    Category.findOne({
+        _id: id
+    }).then(rs => {
+        return Category.remove({
+            _id: id
+        }).then(rs => {
+            res.render('admin/success', {
+                message: '删除成功'
+            })
         })
     })
 })
