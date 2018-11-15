@@ -61,5 +61,9 @@ router.get('/user', (req, res, next) => {
 router.get('/category', (req, res, next) => {
     res.render('../views/admin/category-index', {})
 })
+// 分类添加
+router.get('/category/add', (req, res, next) => {
+    res.render('../views/admin/category-add', {})
+})
 
 module.exports = router
