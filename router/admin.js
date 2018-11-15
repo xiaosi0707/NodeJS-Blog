@@ -22,10 +22,37 @@ router.get('/', (req, res, next) => {
 
 // 用户管理
 router.get('/user', (req, res, next) => {
-    User.find().then(users => {
-        console.log(users)
-        res.render('../views/admin/user-index', {
-            users
+    // 从数据库读取所有用户数据，然后把数据分配给模板展示出来
+    /*
+    * 分页
+    * limit(Number)限制获取数据的条数
+    * skip()        忽略的数据条数
+    * 每页显示两条
+    *   1:1-2   skip:0  (当前页 - 1) * limit
+    *   2:3-4   skip:2  (当前页 - 1) * limit
+    * */
+
+    let page = Number(req.query.page || 1);
+    let limit = 2;
+    let pages = 0;
+
+    User.count().then((count) => {
+        // 计算总页数
+        pages = Math.ceil(count / limit);
+        // 取值不能超过pages
+        page = Math.min(page, pages);
+        // 取值不能小于1
+        page = Math.max(page, 1);
+        // 跳过的条数
+        let skip = (page - 1) * limit;
+        User.find().limit(limit).skip(skip).then(users => {
+            res.render('../views/admin/user-index', {
+                users,
+                page,
+                count,
+                pages,
+                limit
+            })
         })
     })
 })
