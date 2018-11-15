@@ -57,4 +57,9 @@ router.get('/user', (req, res, next) => {
     })
 })
 
+// 分类管理
+router.get('/category', (req, res, next) => {
+    res.render('../views/admin/category-index', {})
+})
+
 module.exports = router
