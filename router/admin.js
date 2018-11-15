@@ -3,6 +3,7 @@
 */
 let express = require('express');
 let router = express.Router();
+let User = require('../models/user');
 
 // router.get('/user', (req, res, next) => {
 //     console.log(req.userInfo)
@@ -16,6 +17,16 @@ let router = express.Router();
 router.get('/', (req, res, next) => {
     res.render('../views/admin/index', {
         userInfo: req.userInfo
+    })
+})
+
+// 用户管理
+router.get('/user', (req, res, next) => {
+    User.find().then(users => {
+        console.log(users)
+        res.render('../views/admin/user-index', {
+            users
+        })
     })
 })
 
