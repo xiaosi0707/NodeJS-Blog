@@ -97,4 +97,22 @@ router.post('/category/add', (req, res, next) => {
         }
     })
 })
+// 分类修改
+router.get('/category/edit', (req, res, next) => {
+    let id = req.query.id || '';
+    console.log(id)
+    Category.findOne({
+        _id: id
+    }).then((rs) => {
+        if(!rs) {
+            res.render('admin/error', {
+                message: '分类信息不存在'
+            })
+        } else {
+            res.render('admin/category-edit', {
+                category: rs
+            })
+        }
+    })
+})
 module.exports = router
