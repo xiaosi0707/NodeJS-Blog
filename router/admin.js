@@ -14,7 +14,9 @@ let router = express.Router();
 // })
 
 router.get('/', (req, res, next) => {
-    res.render('../views/admin/index')
+    res.render('../views/admin/index', {
+        userInfo: req.userInfo
+    })
 })
 
 module.exports = router
