@@ -7,14 +7,27 @@ let app = express() // 创建应用
 let mongoose = require('mongoose')
 var bodyParser = require('body-parser'); //处理Post提交 过来的数据
 var Cookies=require('cookies')
+let User = require('./models/user'); // 引入数据库模型
+
 
 app.use(function (req,res,next) {
     req.cookies=new Cookies(req,res)
     let cookiesUserInfo=req.cookies.get('userCookies');
     req.userInfo = {}
-    if(cookiesUserInfo) req.userInfo = JSON.parse(cookiesUserInfo)
-    // console.log(req.userInfo)
-    next();
+    if(cookiesUserInfo) {
+        try {
+            req.userInfo = JSON.parse(cookiesUserInfo)
+            User.findById(req.userInfo._id).then(userInfo => {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                next();
+            })
+        }
+        catch(e) {
+            next()
+        }
+    } else {
+        next();
+    }
 })
 
 /* Swig - Start */
