@@ -115,4 +115,21 @@ router.get('/category/edit', (req, res, next) => {
         }
     })
 })
+// 分类修改保存
+router.post('/category/edit', (req, res, next) => {
+    // 获取post过来的分类名称
+    let name = req.body.name || '';
+    let id = req.query.id || '';
+    Category.findOne({
+        _id: id
+    }).then(rs => {
+        return Category.updateOne({
+            name
+        })
+    }).then(() => {
+        res.render('admin/success', {
+            message: '分类名称修改成功'
+        })
+    })
+})
 module.exports = router
