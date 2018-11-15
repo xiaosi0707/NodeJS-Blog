@@ -65,5 +65,13 @@ router.get('/category', (req, res, next) => {
 router.get('/category/add', (req, res, next) => {
     res.render('../views/admin/category-add', {})
 })
-
+// 分类保存
+router.post('/category/add', (req, res, next) => {
+    let name = req.body.name || ''; // 接收name
+    if(name === '') {
+        res.render('admin/error', {
+            message: '名称不能为空'
+        })
+    }
+})
 module.exports = router
