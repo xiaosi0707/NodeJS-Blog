@@ -4,6 +4,7 @@
 let express = require('express');
 let router = express.Router();
 let User = require('../models/user');
+let Category = require('../models/categories')
 
 // router.get('/user', (req, res, next) => {
 //     console.log(req.userInfo)
@@ -73,5 +74,22 @@ router.post('/category/add', (req, res, next) => {
             message: '名称不能为空'
         })
     }
+    // 数据库中是否已存在此分类
+    Category.findOne({
+        name: name
+    }).then(rs => {
+        if (rs) {
+            res.render('admin/error', {
+                message: '分类已存在'
+            })
+        } else {
+            res.render('admin/success', {
+                message: '分类保存成功'
+            })
+            return new Category({ // 存到数据库
+                name: name
+            }).save();
+        }
+    })
 })
 module.exports = router
