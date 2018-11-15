@@ -60,7 +60,12 @@ router.get('/user', (req, res, next) => {
 
 // 分类管理
 router.get('/category', (req, res, next) => {
-    res.render('../views/admin/category-index', {})
+    Category.find().then(categories => {
+        res.render('../views/admin/category-index', {
+            categories
+        })
+    })
+
 })
 // 分类添加
 router.get('/category/add', (req, res, next) => {
