@@ -194,7 +194,6 @@ router.post('/content/add', (req, res) => {
         content,
         category
     }).save().then(rs => {
-        console.log(rs)
         res.render('admin/success', {
             message: '内容保存成功'
         })
@@ -203,13 +202,12 @@ router.post('/content/add', (req, res) => {
 // 内容编辑
 router.get('/content/edit', (req, res, next) => {
     let id = req.query.id || '';
-    Category.find().then(categories => {
-        Content.findOne({
-            _id: id
-        }).then(content => {
-            res.render('../views/admin/content-edit', {
-                content
-            })
+    Content.findOne({
+        _id: id
+    }).then(content => {
+        console.log(content)
+        res.render('../views/admin/content-edit', {
+            content
         })
     })
 
