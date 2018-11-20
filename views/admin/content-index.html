@@ -5,25 +5,26 @@
     <li><a href="/">首页</a></li>
     <li><span>内容列表</span></li>
 </ol>
-<h3>内容列表</h3>
+<h3>内容列表1</h3>
 {%  include '../page.html' %}
 <table class="table table-hover table-striped">
-<tr>
-    <th>ID</th>
-    <th>用户名</th>
-    <th>密码</th>
-    <th>是否是管理员</th>
-</tr>
-<!--{% for user in users %}-->
-<!--<tr>-->
-<!--<td>{{ user._id.toString() }}</td>-->
-<!--<td>{{ user.username }}</td>-->
-<!--<td>{{ user.password }}</td>-->
-<!--<td>-->
-<!--{% if user.isAdmin %}是{% else%}否{% endif %}-->
-<!--</td>-->
-<!--</tr>-->
-<!--{% endfor %}-->
+    <tr>
+        <th>ID</th>
+        <th>分类名称</th>
+        <th>标题</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <td>{{ content._id.toString() }}</td>
+        <td>{{ content.category.name }}</td>
+        <td>{{ content.title }}</td>
+        <td>
+            <a href="/admin/content/edit?id={{category._id.toString()}}">修改</a>
+            <a href="/admin/content/delete?id={{category._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 {%  include '../page.html' %}
 {% endblock %}

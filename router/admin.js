@@ -4,7 +4,8 @@
 let express = require('express');
 let router = express.Router();
 let User = require('../models/user');
-let Category = require('../models/categories')
+let Category = require('../models/categories');
+let Content = require('../models/contents');
 
 // router.get('/user', (req, res, next) => {
 //     console.log(req.userInfo)
@@ -149,16 +150,55 @@ router.get('/category/delete', (req, res, next) => {
 
 // 内容首页
 router.get('/content', (req, res, next) => {
-    res.render('../views/admin/content-index')
+    Content.find().then(contents => {
+        console.log(contents)
+        res.render('../views/admin/content-index', {
+            contents
+        })
+    })
+
 })
 // 内容添加
 router.get('/content/add', (req, res, next) => {
     Category.find().then(categories => {
-        console.log(categories)
         res.render('admin/content-add', {
             categories
         })
     })
     // res.render('../views/admin/content-add')
+})
+// 内容保存
+router.post('/content/add', (req, res) => {
+    console.log(req.body)
+    let { title, description, content } = req.body
+    if (title === '') {
+        res.render('admin/error', {
+            message: '标题不能为空'
+        })
+        return;
+    }
+    if (description === '') {
+        res.render('admin/error', {
+            message: '简介不能为空'
+        })
+        return;
+    }
+    if (content === '') {
+        res.render('admin/error', {
+            message: '内容不能为空'
+        })
+        return;
+    }
+    // 保存到数据库
+    new Content({
+        title,
+        description,
+        content
+    }).save().then(rs => {
+        // console.log(rs)
+        res.render('admin/success', {
+            message: '内容保存成功'
+        })
+    })
 })
 module.exports = router
