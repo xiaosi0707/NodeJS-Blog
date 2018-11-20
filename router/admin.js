@@ -153,6 +153,12 @@ router.get('/content', (req, res, next) => {
 })
 // 内容添加
 router.get('/content/add', (req, res, next) => {
-    res.render('../views/admin/content-add')
+    Category.find().then(categories => {
+        console.log(categories)
+        res.render('admin/content-add', {
+            categories
+        })
+    })
+    // res.render('../views/admin/content-add')
 })
 module.exports = router
