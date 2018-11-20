@@ -7,7 +7,7 @@ let app = express() // 创建应用
 let mongoose = require('mongoose')
 var bodyParser = require('body-parser'); //处理Post提交 过来的数据
 var Cookies=require('cookies')
-let User = require('./models/user'); // 引入数据库模型
+let User = require('./models/User'); // 引入数据库模型
 
 
 app.use(function (req,res,next) {

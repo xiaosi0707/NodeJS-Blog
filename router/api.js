@@ -3,7 +3,7 @@
 */
 let express = require('express');
 let router = express.Router();
-let User = require('../models/user');
+let User = require('../models/User');
 
 // 接口统一返回格式
 let responseData = {};

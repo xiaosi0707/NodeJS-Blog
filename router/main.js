@@ -3,7 +3,7 @@
 */
 let express = require('express');
 let router = express.Router();
-let Category = require('../models/categories');
+let Category = require('../models/Category');
 
 router.get('/', (req, res, next) => {
     // res.send('首页')

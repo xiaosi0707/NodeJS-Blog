@@ -3,9 +3,9 @@
 */
 let express = require('express');
 let router = express.Router();
-let User = require('../models/user');
-let Category = require('../models/categories');
-let Content = require('../models/contents');
+let User = require('../models/User');
+let Category = require('../models/Category');
+let Content = require('../models/Content');
 
 // router.get('/user', (req, res, next) => {
 //     console.log(req.userInfo)
@@ -194,6 +194,7 @@ router.post('/content/add', (req, res) => {
         content,
         category
     }).save().then(rs => {
+        console.log(rs)
         res.render('admin/success', {
             message: '内容保存成功'
         })
@@ -206,7 +207,6 @@ router.get('/content/edit', (req, res, next) => {
         Content.findOne({
             _id: id
         }).then(content => {
-            console.log(content)
             res.render('../views/admin/content-edit', {
                 content
             })
