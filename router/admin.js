@@ -151,7 +151,6 @@ router.get('/category/delete', (req, res, next) => {
 // 内容首页
 router.get('/content', (req, res, next) => {
     Content.find().then(contents => {
-        console.log(contents)
         res.render('../views/admin/content-index', {
             contents
         })
@@ -169,8 +168,7 @@ router.get('/content/add', (req, res, next) => {
 })
 // 内容保存
 router.post('/content/add', (req, res) => {
-    console.log(req.body)
-    let { title, description, content } = req.body
+    let { title, description, content, category } = req.body
     if (title === '') {
         res.render('admin/error', {
             message: '标题不能为空'
@@ -193,12 +191,27 @@ router.post('/content/add', (req, res) => {
     new Content({
         title,
         description,
-        content
+        content,
+        category
     }).save().then(rs => {
-        // console.log(rs)
         res.render('admin/success', {
             message: '内容保存成功'
         })
     })
+})
+// 内容编辑
+router.get('/content/edit', (req, res, next) => {
+    let id = req.query.id || '';
+    Category.find().then(categories => {
+        Content.findOne({
+            _id: id
+        }).then(content => {
+            console.log(content)
+            res.render('../views/admin/content-edit', {
+                content
+            })
+        })
+    })
+
 })
 module.exports = router
