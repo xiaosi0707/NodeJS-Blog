@@ -205,11 +205,37 @@ router.get('/content/edit', (req, res, next) => {
     Content.findOne({
         _id: id
     }).then(content => {
-        console.log(content)
         res.render('../views/admin/content-edit', {
             content
         })
     })
-
+})
+// 保存编辑后的内容
+router.post('/content/edit', (req, res) => {
+    let { id } = req.query.id || ''
+    console.log(req.body)
+    let { title, description, content, category } = req.body
+    Content.updateMany({
+        _id: id
+    }, {
+        title,
+        description,
+        content,
+        category
+    }).then(() => {
+        res.render('admin/success', {
+            message: '内容修改成功'
+        })
+    })
+})
+router.get('/content/delete', (req, res) => {
+    let { id } = req.query || '';
+    Content.remove({
+        _id: id
+    }).then(() => {
+        res.render('admin/success', {
+            message: '删除成功'
+        })
+    })
 })
 module.exports = router
